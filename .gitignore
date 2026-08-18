@@ -1,0 +1,9 @@
+# Python caches
+__pycache__/
+*.pyc
+
+# Virtual Environment
+my_env/
+
+# Auto-generated user data
+thumbnails/
