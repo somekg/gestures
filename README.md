@@ -1,6 +1,11 @@
 # AI Hand Gesture Macro Controller
+## 📹 Video Demo
 
-A modular, real-time Python application that uses computer vision and machine learning to translate custom hand gestures into system-wide keyboard macros. 
+<div align="center">
+  <video src=https://github.com/user-attachments/assets/d0c6f339-5229-4587-9a2c-4a15dc796948 controls="controls" width="800"></video>
+</div>
+
+A real-time Python application that uses computer vision and machine learning to translate custom hand gestures into system-wide keyboard macros. 
 
 This app allows users to easily train their own custom hand gestures on the fly, assign configurable Tap or Hold macros, and execute them universally across any Linux application.
 
@@ -10,13 +15,6 @@ This app allows users to easily train their own custom hand gestures on the fly,
 * **Prioritize your sweet spot** by recording the majority of your frames in the exact position you plan to use the gesture.
 * **Train at least 5+ distinct classes** (even if you don't assign macros to all of them) to give the AI enough separation boundaries.
 * **Handle false positives** by taking any motion that frequently confuses the model and recording it as its own separate gesture class.
-
-## 📹 Video Demo
-Video demonstration of the training process and model capabilities (Sorry for low quality, it was necessary to show the whole process, at least is barely readable) 
-
-<div align="center">
-  <video src=https://github.com/user-attachments/assets/d0c6f339-5229-4587-9a2c-4a15dc796948 controls="controls" width="800"></video>
-</div>
 
 ## ✨ Key Features
 *   **Real-Time Custom Training:** Record and train new gestures directly through the app in seconds without touching any code.
