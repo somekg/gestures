@@ -37,7 +37,7 @@ wget -O gesture_recognizer.task https://storage.googleapis.com/mediapipe-models/
 ```
 
 ### 🔐 Running Without Sudo (Recommended Setup)
-> Quick tip: I personally didn't have to use this because I had Steam installed, which already modifies the `uinput` permissions for you.
+> Quick tip: Apps like Steam already do something like this, you can try running the program directly or checking the permissions of /dev/input for a + at the end (file has an Access Control List)
 
 Follow these steps to permanently set up secure, sudo-free access:
 
@@ -56,6 +56,8 @@ sudo udevadm trigger
 ```
 #### Step 4: Restart computer
 You can now activate your environment and run the gesture application safely without sudo:
+
+## 🏃 Running command
 ```bash
 python main.py
 ```
