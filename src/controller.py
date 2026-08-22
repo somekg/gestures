@@ -43,7 +43,7 @@ class AppController:
     def run(self):
         vision_tracker = VisionTracker()
         options = GestureRecognizerOptions(
-            base_options=BaseOptions(model_asset_path='/home/alex/Desktop/gestures/gesture_recognizer.task'),
+            base_options=BaseOptions(model_asset_path='gesture_recognizer.task'),
             running_mode=VisionRunningMode.LIVE_STREAM,
             result_callback=vision_tracker.result_callback,
             num_hands=2
