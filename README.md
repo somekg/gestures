@@ -9,6 +9,8 @@ A real-time Python application that uses computer vision and machine learning to
 
 This app allows users to easily train their own custom hand gestures on the fly, assign configurable Tap or Hold macros, and execute them universally across any Linux application.
 
+The idea from this project came from me imagining the exaggerated swagger of pulling the middle finger and alt+f4-ing a window. 
+
 ## 💡 Pro-Tips for Training Accurate Gestures
 * **Aim for 150+ frames per gesture** for stable, reliable training data.
 * **Vary your angles and posture** slightly while recording so the model handles minor hand variations.
