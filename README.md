@@ -42,7 +42,7 @@ cd YOUR-REPO-NAME
 > Use your python version here. (3.12 Recommended)
 ```bash
 python3.12 -m venv my_env
-source my_env/bin/activate
+source my_env/bin/activate # When finished with the env type `deactivate` to get out of it.
 pip install -r requirements.txt
 ```
 **3. Download the official Mediapipe task:**
