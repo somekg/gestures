@@ -1,6 +1,24 @@
+import os
+import sys
+
+class SuppressCWarnings:
+    """Temporarily forces C/C++ level stderr output to /dev/null."""
+    def __enter__(self):
+        # Save a copy of the original OS-level stderr (file descriptor 2)
+        self.original_stderr = os.dup(sys.stderr.fileno())
+        # Open a pipeline to nowhere
+        self.devnull = os.open(os.devnull, os.O_WRONLY)
+        # Force the OS to redirect all stderr to the void
+        os.dup2(self.devnull, sys.stderr.fileno())
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        # Restore the real stderr so normal Python errors show up again
+        os.dup2(self.original_stderr, sys.stderr.fileno())
+        os.close(self.devnull)
+        os.close(self.original_stderr)
+
 import cv2
 import time
-import os
 import numpy as np
 import mediapipe as mp
 
@@ -42,38 +60,40 @@ class AppController:
     # ==========================================
     def run(self):
         vision_tracker = VisionTracker()
-        options = GestureRecognizerOptions(
-            base_options=BaseOptions(model_asset_path='gesture_recognizer.task'),
-            running_mode=VisionRunningMode.LIVE_STREAM,
-            result_callback=vision_tracker.result_callback,
-            num_hands=2
-        )
+        
+        with SuppressCWarnings():
+            options = GestureRecognizerOptions(
+                base_options=BaseOptions(model_asset_path='gesture_recognizer.task'),
+                running_mode=VisionRunningMode.LIVE_STREAM,
+                result_callback=vision_tracker.result_callback,
+                num_hands=2
+            )
 
-        cap = cv2.VideoCapture(0)
+            cap = cv2.VideoCapture(0)
 
-        with GestureRecognizer.create_from_options(options) as recognizer:
-            while cap.isOpened() and self.is_running:
-                success, frame = cap.read()
-                if not success: break
+            with GestureRecognizer.create_from_options(options) as recognizer:
+                while cap.isOpened() and self.is_running:
+                    success, frame = cap.read()
+                    if not success: break
 
-                flipped_frame = cv2.flip(frame, 1)
-                rgb_frame = cv2.cvtColor(flipped_frame, cv2.COLOR_BGR2RGB)
-                mp_image = mp.Image(image_format=mp.ImageFormat.SRGB, data=rgb_frame)
-                
-                timestamp_ms = int(time.time() * 1000)
-                recognizer.recognize_async(mp_image, timestamp_ms)
+                    flipped_frame = cv2.flip(frame, 1)
+                    rgb_frame = cv2.cvtColor(flipped_frame, cv2.COLOR_BGR2RGB)
+                    mp_image = mp.Image(image_format=mp.ImageFormat.SRGB, data=rgb_frame)
+                    
+                    timestamp_ms = int(time.time() * 1000)
+                    recognizer.recognize_async(mp_image, timestamp_ms)
 
-                latest_result = vision_tracker.get_latest_result()
-                
-                self.state['overlay_msg'] = ""
-                self.state['action_msg'] = ""
+                    latest_result = vision_tracker.get_latest_result()
+                    
+                    self.state['overlay_msg'] = ""
+                    self.state['action_msg'] = ""
 
-                self._process_ai_predictions(latest_result)
-                key = self.ui.render(flipped_frame, self.state, latest_result)
-                self._route_keyboard_input(key, latest_result)
+                    self._process_ai_predictions(latest_result)
+                    key = self.ui.render(flipped_frame, self.state, latest_result)
+                    self._route_keyboard_input(key, latest_result)
 
-        cap.release()
-        cv2.destroyAllWindows()
+            cap.release()
+            cv2.destroyAllWindows()
 
     # ==========================================
     # 2. AI & MACRO PROCESSING 
