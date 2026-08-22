@@ -8,10 +8,6 @@ def load_dataset():
     if os.path.exists(DATASET_PATH):
         with open(DATASET_PATH, 'rb') as f:
             data = pickle.load(f)
-            # Legacy support: If loading an older dataset that didn't have macros yet
-            if len(data) == 2: 
-                return data[0], data[1], {}
-            # Modern support: Return all three
             return data[0], data[1], data[2] 
             
     return [], [], {}
@@ -32,5 +28,8 @@ def remove_gesture(X_data, y_labels, gesture_name):
         if y != gesture_name:
             filtered_X.append(x)
             filtered_y.append(y)
-            
+    
+    if not filtered_X and os.path.exists(DATASET_PATH): 
+        os.remove(DATASET_PATH)
+
     return filtered_X, filtered_y

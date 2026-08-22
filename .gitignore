@@ -1,9 +1,5 @@
-# Python caches
-__pycache__/
-*.pyc
-
-# Virtual Environment
+models/
+gesture_recognizer.task
+Shit I want to implement.txt
 my_env/
-
-# Auto-generated user data
-thumbnails/
+__pycache__/
