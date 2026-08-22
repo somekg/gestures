@@ -39,8 +39,9 @@ git clone [https://github.com/YOUR-USERNAME/YOUR-REPO-NAME.git](https://github.c
 cd YOUR-REPO-NAME
 ```
 **2. Setup the python environment:**
+> Use your python version here. (3.12 Recommended)
 ```bash
-python3 -m venv my_env
+python3.12 -m venv my_env
 source my_env/bin/activate
 pip install -r requirements.txt
 ```
