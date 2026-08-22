@@ -43,8 +43,12 @@ cd YOUR-REPO-NAME
 ```bash
 python3.12 -m venv my_env
 source my_env/bin/activate # When finished with the env type `deactivate` to get out of it.
-pip install -r requirements.txt
+pip install -r requirements.txt 
 ```
+> Because this project uses **`evdev`** to simulate virtual keystrokes via the Linux kernel, **standard `pip install` requires building native C extensions**. 
+> 
+> As outlined in the [official python-evdev installation guide](https://python-evdev.readthedocs.io/en/latest/install.html), you must have a C compiler (`gcc`), Python development headers, and matching Linux kernel headers installed on your system *before* running `pip install -r requirements.txt`, or the wheel build will fail.
+
 **3. Download the official Mediapipe task:**
 > Note: If the wget download fails, you can manually download the current gesture_recognizer.task model from the Official MediaPipe Documentation.
 ```bash
