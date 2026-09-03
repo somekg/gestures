@@ -36,7 +36,7 @@ The idea from this project came from me imagining the exaggerated swagger of pul
 **1. Clone the repository:**
 ```bash
 git clone https://github.com/somekg/gestures.git
-cd gestures.git
+cd gestures
 ```
 **2. Setup the python environment:**
 > Use your python version here. (3.12 Recommended)
