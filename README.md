@@ -43,7 +43,7 @@ cd gestures
 ```bash
 python3.12 -m venv my_env
 source my_env/bin/activate # When finished with the env type `deactivate` to get out of it.
-pip install -r requirements.txt 
+python -m pip install -r requirements.txt 
 ```
 > Because this project uses **`evdev`** to simulate virtual keystrokes via the Linux kernel, **standard `pip install` requires building native C extensions**. 
 > 
